@@ -52,7 +52,8 @@ class Item:
         """
         класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv_
         """
-        with open(os.path.join(os.path.dirname(__file__), 'items.csv'), newline='') as csvfile:
+        cls.all = []
+        with open(os.path.join(os.path.dirname(__file__), 'items.csv'), newline='', encoding='cp1251') as csvfile:
             reader = csv.DictReader(csvfile)
 
             for i in reader:
