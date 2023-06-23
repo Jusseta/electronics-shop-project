@@ -2,11 +2,16 @@
 
 import pytest
 from src.item import Item
+from src.phone import Phone
 
 
 @pytest.fixture
 def item1():
     return Item('Наушники', 5000, 10)
+
+@pytest.fixture
+def item2():
+    return Phone("iPhone 14", 120_000, 5, 2)
 
 
 def test_item_total(item1):
@@ -51,3 +56,9 @@ def test__str__(item1):
     assert str(item1) == 'Наушники'
     item2 = Item("Смартфон", 10000, 20)
     assert str(item2) == 'Смартфон'
+
+
+def test__add__(item1, item2):
+    assert item1 + item2 == 15
+    item2.quantity = 3
+    assert item1 + item2 == 13

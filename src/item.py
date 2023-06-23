@@ -42,6 +42,11 @@ class Item:
         """
         self.price = self.price * self.pay_rate
 
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Не дочерний класс Item')
+        return self.quantity + other.quantity
+
     @property
     def name(self):
         return self.__name
