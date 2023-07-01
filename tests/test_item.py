@@ -1,13 +1,13 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-
 import pytest
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 
 
 @pytest.fixture
 def item1():
     return Item('Наушники', 5000, 10)
+
 
 @pytest.fixture
 def item2():
@@ -38,6 +38,12 @@ def test_instantiate_from_csv():
     assert item_all.name == 'Кабель'
     assert item_all.price == 10
     assert item_all.quantity == 5
+
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv(file=r'tests/test_items.csv')
+
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv(file='')
 
 
 def test_string_to_number():
